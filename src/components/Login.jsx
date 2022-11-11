@@ -30,9 +30,9 @@ const Login = () => {
         Login
       </Box>
       <FormControl as='form' onSubmit={onSubmitLogin}>
-        <FormLabel>Email address</FormLabel>
+        <FormLabel>Username</FormLabel>
         <Input placeholder="Username" type="text" variant="outline" value={username} onChange={(e) => setUsername(e.target.value)} />
-        <FormLabel>Email address</FormLabel>
+        <FormLabel>Password</FormLabel>
         <Input placeholder="Password" variant="outline" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         <Button type='submit'>Login</Button>
       </FormControl>

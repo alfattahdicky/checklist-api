@@ -1,8 +1,10 @@
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom"
 import Home from "./components/Home"
+import HomeChecklist from "./components/Checklist/Home"
 import Login from "./components/Login"
 import Signup from "./components/Signup"
-import Dashboard from "./components/Checklist/Dashboard"
+import Dashboard from "./components/Checklist/Dashboard";
+import DetailItem from "./components/Checklist/DetailItem";
 
 function App() {
 
@@ -20,8 +22,11 @@ function App() {
         <Route path="/register" element={<Signup />}/>
         <Route path="/login" element={<Login />}/>
         <Route path="/" element={<Home />}/>
-        <Route path="/checklist" 
-        element={<Dashboard />}/>
+        <Route path="/checklist" element={<HomeChecklist />}/>
+        <Route path="/checklist/:id" element={<HomeChecklist />}/>
+        <Route path={`/checklist/:checklistid/item`} element={<DetailItem />}/>
+        <Route path={`/checklist/:checklistid/item/:checklistitemid`} element={<DetailItem />}/> 
+        <Route path={`/checklist/:checklistid/item/rename/:checklistitemid`} element={<DetailItem />}/> 
       </Routes>
     </BrowserRouter>
   )

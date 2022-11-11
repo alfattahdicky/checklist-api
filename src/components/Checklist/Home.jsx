@@ -4,8 +4,11 @@ import { uid } from 'uid';
 import axios from 'axios';
 import { BASEURL, TOKEN } from '../../API';
 import List from './List';
+import { useParams, useNavigate } from 'react-router-dom'
+
 
 const Home = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [datas, setDatas] = useState([]);
   const [newData, setNewData] = useState(null);
@@ -37,6 +40,18 @@ const Home = () => {
     console.log(getItems);
   }
 
+  const deleteItems = async (id) => {
+    const urlDeleteItems = `/checklist/${id}`
+    await axios.delete(`${BASEURL}${urlDeleteItems}`,{
+      headers: {
+        Authorization: `Bearer ${TOKEN()}`
+      }
+    });
+    setDatas(datas.filter((data) => data.id !== id));
+    navigate(urlDeleteItems);
+  }
+
+
   return (
     <Stack>
       <Box>
@@ -45,7 +60,7 @@ const Home = () => {
         <Button onClick={getAllItems}>Get All Checklist</Button>  
       </Box>
       {<Box>{newData ? newData.name : ""}</Box>}
-      {datas && <List datas={datas} />}
+      {datas && <List datas={datas} deleteItems={deleteItems} />}
 
     </Stack>
   )
